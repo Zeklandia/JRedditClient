@@ -1,16 +1,5 @@
 package zeklandia.desktop.reddit.client;
 
-/**
- *
- * @author Zeklandia
- */
-
-import com.omrlnr.jreddit.User;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,9 +11,6 @@ public class RedditClientMain extends javax.swing.JFrame {
     private static final String classname = "RedditClientMain";
     private static final String padding = " ";
     
-    /**
-     * Creates new form Main
-     */
     public RedditClientMain() {
         initComponents();
     }
@@ -87,8 +73,11 @@ public class RedditClientMain extends javax.swing.JFrame {
                 
                 RedditClientStreamPanel tabStream;
                 tabStream = new RedditClientStreamPanel();
+                RedditClientSubsPanel tabSubs;
+                tabSubs = new RedditClientSubsPanel();
                 
                 tabsView.addTab("Stream", tabStream);
+                tabsView.addTab("Subreddits", tabSubs);
             }
         });
         

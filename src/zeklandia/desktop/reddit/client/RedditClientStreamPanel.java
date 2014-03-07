@@ -1,20 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package zeklandia.desktop.reddit.client;
 
-/**
- *
- * @author Zeklandia
- */
 public class RedditClientStreamPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RedditClientStreamPanel
-     */
     public RedditClientStreamPanel() {
         initComponents();
     }
@@ -43,7 +30,6 @@ public class RedditClientStreamPanel extends javax.swing.JPanel {
             .addGap(0, 540, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

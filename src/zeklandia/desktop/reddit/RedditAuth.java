@@ -1,21 +1,20 @@
-package zeklandia.desktop.reddit.client;
+package zeklandia.desktop.reddit;
 
-/**
- *
- * @author Zeklandia
- */
+import com.omrlnr.jreddit.User;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import zeklandia.desktop.logger.LogOutput;
+import zeklandia.desktop.reddit.client.RedditClientMain;
 
-import com.omrlnr.jreddit.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+public class RedditAuth extends javax.swing.JDialog {
 
-public class ClientLogin extends javax.swing.JDialog {
-
-    /**
-     * Creates new form Login
-     */
+    private static final String classname = "RedditAuth";
+    private static final String padding = "       ";
     
-    public ClientLogin(java.awt.Frame parent, boolean modal) {
+    public RedditAuth(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -36,15 +35,26 @@ public class ClientLogin extends javax.swing.JDialog {
         inputPassword = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        checkboxRememberLogin = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setModal(true);
+        setResizable(false);
 
+        jLabel1.setBackground(null);
+        jLabel1.setFont(null);
+        jLabel1.setForeground(null);
         jLabel1.setText("Please enter your reddit username and password.");
 
+        inputUsername.setBackground(null);
+        inputUsername.setFont(null);
+        inputUsername.setForeground(null);
         inputUsername.setToolTipText("Enter your username");
 
+        buttonLogin.setBackground(null);
+        buttonLogin.setFont(null);
+        buttonLogin.setForeground(null);
         buttonLogin.setText("Login");
         buttonLogin.setToolTipText("Login as this user");
         buttonLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -55,6 +65,9 @@ public class ClientLogin extends javax.swing.JDialog {
             }
         });
 
+        buttonCancel.setBackground(null);
+        buttonCancel.setFont(null);
+        buttonCancel.setForeground(null);
         buttonCancel.setText("Cancel");
         buttonCancel.setToolTipText("Cancel");
         buttonCancel.setName("cancel"); // NOI18N
@@ -64,11 +77,26 @@ public class ClientLogin extends javax.swing.JDialog {
             }
         });
 
+        inputPassword.setBackground(null);
+        inputPassword.setFont(null);
+        inputPassword.setForeground(null);
         inputPassword.setToolTipText("Enter your reddit password");
 
+        jLabel2.setBackground(null);
+        jLabel2.setFont(null);
+        jLabel2.setForeground(null);
         jLabel2.setText("Username");
 
+        jLabel3.setBackground(null);
+        jLabel3.setFont(null);
+        jLabel3.setForeground(null);
         jLabel3.setText("Password");
+
+        checkboxRememberLogin.setBackground(null);
+        checkboxRememberLogin.setFont(null);
+        checkboxRememberLogin.setForeground(null);
+        checkboxRememberLogin.setText("Remember Login");
+        checkboxRememberLogin.setToolTipText("Save this login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,24 +104,22 @@ public class ClientLogin extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(buttonCancel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(buttonCancel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonLogin))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(inputPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                    .addComponent(inputUsername, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(checkboxRememberLogin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                                .addComponent(buttonLogin))
+                            .addComponent(inputPassword)
+                            .addComponent(inputUsername))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,11 +134,12 @@ public class ClientLogin extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCancel)
                     .addComponent(buttonLogin)
-                    .addComponent(buttonCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(checkboxRememberLogin))
+                .addContainerGap())
         );
 
         pack();
@@ -122,45 +149,92 @@ public class ClientLogin extends javax.swing.JDialog {
         String username = inputUsername.getText();
         String password = inputPassword.getText();
         
-        ClientMain.userLogin(username, password);
-        ClientMain.redditScrollPane.requestFocus();
+        if (checkboxRememberLogin.isSelected() == true) {
+            saveLogin(username, password);
+        }
+        
+        userLogin(username, password);
+        saveLogin(username, password);
+        RedditClientMain.tabsView.requestFocus();
+        this.dispose();
     }//GEN-LAST:event_buttonLoginMouseClicked
-
+    
     private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
-        ClientMain.redditScrollPane.requestFocus();
+        LogOutput.logMessage(padding, classname, "User cancelled login");
+        RedditClientMain.tabsView.requestFocus();
         this.dispose();
     }//GEN-LAST:event_buttonCancelMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    
     public static void main() {
 
-        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                ClientLogin dialog = new ClientLogin(new javax.swing.JFrame(), true);
-                dialog.setLocationRelativeTo(ClientMain.redditScrollPane);
+                RedditAuth dialog = new RedditAuth(new javax.swing.JFrame(), true);
+                dialog.setLocationRelativeTo(null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
+                checkboxRememberLogin.setSelected(true);
                 dialog.setVisible(true);
             }
         });
+        LogOutput.logMessage(padding, classname, "Created login prompt");
+    }
+    
+    public static void userLogin(String username, String password) {
+        
+        User user = new User(username, password);
+        
+        try {
+            user.connect();
+        } catch (Exception ex) {
+            LogOutput.logError(padding, classname, "Login failed");
+            JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Login failed");
+            RedditAuth.main();
+        }
+        LogOutput.logMessage(padding, classname, "Login successful");
+    }
+    
+    public static void saveLogin(String username, String password) {
+        File configFolder;
+        configFolder = new File(System.getProperty("user.home") + "/.config/");
+        
+        try {
+            if (!configFolder.exists()) {
+                boolean status;
+                status = configFolder.mkdir();
+                if (status) {
+                    LogOutput.logMessage(padding, classname, "Created ~/.config");
+                }
+            }
+        } catch (Exception ex) {
+            LogOutput.logError(padding, classname, "Failed to create ~/.config");
+        }
+        
+        try {
+            FileWriter loginFileStream;
+            loginFileStream = new FileWriter(configFolder + "java-reddit.conf");
+            try (BufferedWriter loginFileBuffer = new BufferedWriter(loginFileStream)) {
+                loginFileBuffer.write(username);
+            }
+        } catch (IOException e) {
+            LogOutput.logError(padding, classname, "Failed to save login");
+            JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Saving login failed");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancel;
     public static javax.swing.JButton buttonLogin;
+    private static javax.swing.JCheckBox checkboxRememberLogin;
     public static javax.swing.JPasswordField inputPassword;
     public static javax.swing.JTextField inputUsername;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
-
 }
