@@ -7,12 +7,12 @@ import zeklandia.desktop.logger.LogOutput;
 import zeklandia.desktop.reddit.RedditAuth;
 
 public class RedditClientMain extends javax.swing.JFrame {
-    
+
     private static final String classname = "RedditClientMain";
     private static final String padding = " ";
-    
+
     public RedditClientMain() {
-        initComponents();
+	initComponents();
     }
 
     /**
@@ -51,38 +51,38 @@ public class RedditClientMain extends javax.swing.JFrame {
      */
     public static void main() {
 
-        try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-        if ("Nimbus".equals(info.getName())) {
-            UIManager.setLookAndFeel(info.getClassName());
-            break;
-                }
-            }
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-            LogOutput.logError(padding, classname, "Failed to set theme");
-        }
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                RedditClientMain client = new RedditClientMain();
-                client.setLocationRelativeTo(null);
-                client.setVisible(true);
-                client.setTitle("Java-Reddit");
-                client.setDefaultLookAndFeelDecorated(true);
-                
-                RedditClientStreamPanel tabStream;
-                tabStream = new RedditClientStreamPanel();
-                RedditClientSubsPanel tabSubs;
-                tabSubs = new RedditClientSubsPanel();
-                
-                tabsView.addTab("Stream", tabStream);
-                tabsView.addTab("Subreddits", tabSubs);
-            }
-        });
-        
-        LogOutput.logMessage(padding, classname, "Created main window");
-        RedditAuth.main();
+	try {
+	    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		if ("Nimbus".equals(info.getName())) {
+		    UIManager.setLookAndFeel(info.getClassName());
+		    break;
+		}
+	    }
+	} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+	    LogOutput.logError(padding, classname, "Failed to set theme");
+	}
+
+	java.awt.EventQueue.invokeLater(new Runnable() {
+	    @Override
+	    public void run() {
+		RedditClientMain client = new RedditClientMain();
+		client.setLocationRelativeTo(null);
+		client.setVisible(true);
+		client.setTitle("Java-Reddit");
+		client.setDefaultLookAndFeelDecorated(true);
+
+		RedditClientStreamPanel tabStream;
+		tabStream = new RedditClientStreamPanel();
+		RedditClientSubsPanel tabSubs;
+		tabSubs = new RedditClientSubsPanel();
+
+		tabsView.addTab("Stream", tabStream);
+		tabsView.addTab("Subreddits", tabSubs);
+	    }
+	});
+
+	LogOutput.logMessage(padding, classname, "Created main window");
+	RedditAuth.main();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

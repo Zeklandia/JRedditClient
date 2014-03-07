@@ -3,7 +3,7 @@ package zeklandia.desktop.reddit.client;
 public class RedditClientStreamPanel extends javax.swing.JPanel {
 
     public RedditClientStreamPanel() {
-        initComponents();
+	initComponents();
     }
 
     /**

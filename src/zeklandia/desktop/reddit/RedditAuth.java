@@ -13,10 +13,10 @@ public class RedditAuth extends javax.swing.JDialog {
 
     private static final String classname = "RedditAuth";
     private static final String padding = "       ";
-    
+
     public RedditAuth(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
+	super(parent, modal);
+	initComponents();
     }
 
     /**
@@ -146,85 +146,85 @@ public class RedditAuth extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLoginMouseClicked
-        String username = inputUsername.getText();
-        String password = inputPassword.getText();
-        
-        if (checkboxRememberLogin.isSelected() == true) {
-            saveLogin(username, password);
-        }
-        
-        userLogin(username, password);
-        saveLogin(username, password);
-        RedditClientMain.tabsView.requestFocus();
-        this.dispose();
+	String username = inputUsername.getText();
+	String password = inputPassword.getText();
+
+	if (checkboxRememberLogin.isSelected() == true) {
+	    saveLogin(username, password);
+	}
+
+	userLogin(username, password);
+	saveLogin(username, password);
+	RedditClientMain.tabsView.requestFocus();
+	this.dispose();
     }//GEN-LAST:event_buttonLoginMouseClicked
-    
+
     private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
-        LogOutput.logMessage(padding, classname, "User cancelled login");
-        RedditClientMain.tabsView.requestFocus();
-        this.dispose();
+	LogOutput.logMessage(padding, classname, "User cancelled login");
+	RedditClientMain.tabsView.requestFocus();
+	this.dispose();
     }//GEN-LAST:event_buttonCancelMouseClicked
 
     public static void main() {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                RedditAuth dialog = new RedditAuth(new javax.swing.JFrame(), true);
-                dialog.setLocationRelativeTo(null);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                checkboxRememberLogin.setSelected(true);
-                dialog.setVisible(true);
-            }
-        });
-        LogOutput.logMessage(padding, classname, "Created login prompt");
+	java.awt.EventQueue.invokeLater(new Runnable() {
+	    @Override
+	    public void run() {
+		RedditAuth dialog = new RedditAuth(new javax.swing.JFrame(), true);
+		dialog.setLocationRelativeTo(null);
+		dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent e) {
+			System.exit(0);
+		    }
+		});
+		checkboxRememberLogin.setSelected(true);
+		dialog.setVisible(true);
+	    }
+	});
+	LogOutput.logMessage(padding, classname, "Created login prompt");
     }
-    
+
     public static void userLogin(String username, String password) {
-        
-        User user = new User(username, password);
-        
-        try {
-            user.connect();
-        } catch (Exception ex) {
-            LogOutput.logError(padding, classname, "Login failed");
-            JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Login failed");
-            RedditAuth.main();
-        }
-        LogOutput.logMessage(padding, classname, "Login successful");
+
+	User user = new User(username, password);
+
+	try {
+	    user.connect();
+	} catch (Exception ex) {
+	    LogOutput.logError(padding, classname, "Login failed");
+	    JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Login failed");
+	    RedditAuth.main();
+	}
+	LogOutput.logMessage(padding, classname, "Login successful");
     }
-    
+
     public static void saveLogin(String username, String password) {
-        File configFolder;
-        configFolder = new File(System.getProperty("user.home") + "/.config/");
-        
-        try {
-            if (!configFolder.exists()) {
-                boolean status;
-                status = configFolder.mkdir();
-                if (status) {
-                    LogOutput.logMessage(padding, classname, "Created ~/.config");
-                }
-            }
-        } catch (Exception ex) {
-            LogOutput.logError(padding, classname, "Failed to create ~/.config");
-        }
-        
-        try {
-            FileWriter loginFileStream;
-            loginFileStream = new FileWriter(configFolder + "java-reddit.conf");
-            try (BufferedWriter loginFileBuffer = new BufferedWriter(loginFileStream)) {
-                loginFileBuffer.write(username);
-            }
-        } catch (IOException e) {
-            LogOutput.logError(padding, classname, "Failed to save login");
-            JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Saving login failed");
-        }
+	File configFolder;
+	configFolder = new File(System.getProperty("user.home") + "/.config/");
+
+	try {
+	    if (!configFolder.exists()) {
+		boolean status;
+		status = configFolder.mkdir();
+		if (status) {
+		    LogOutput.logMessage(padding, classname, "Created ~/.config");
+		}
+	    }
+	} catch (Exception ex) {
+	    LogOutput.logError(padding, classname, "Failed to create ~/.config");
+	}
+
+	try {
+	    FileWriter loginFileStream;
+	    loginFileStream = new FileWriter(configFolder + "java-reddit.conf");
+	    try (BufferedWriter loginFileBuffer = new BufferedWriter(loginFileStream)) {
+		loginFileBuffer.write(username);
+	    }
+	} catch (IOException e) {
+	    LogOutput.logError(padding, classname, "Failed to save login");
+	    JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Saving login failed");
+	}
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

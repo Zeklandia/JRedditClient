@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package zeklandia.desktop.reddit.client;
 
 /**
@@ -16,7 +15,7 @@ public class RedditClientSubsPanel extends javax.swing.JPanel {
      * Creates new form RedditClientStreamPanel
      */
     public RedditClientSubsPanel() {
-        initComponents();
+	initComponents();
     }
 
     /**
@@ -43,7 +42,6 @@ public class RedditClientSubsPanel extends javax.swing.JPanel {
             .addGap(0, 540, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
