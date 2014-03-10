@@ -1,7 +1,7 @@
 package zeklandia.desktop.reddit;
 
 import org.fusesource.jansi.AnsiConsole;
-import zeklandia.desktop.logger.LogOutput;
+import zeklandia.desktop.logger.JLogger;
 import zeklandia.desktop.reddit.client.RedditClientMain;
 
 public class RedditMain {
@@ -15,8 +15,8 @@ public class RedditMain {
 		+ "  [0;1;35;95m#[0m     [0;1;32;92m\"#[0;1;36;96mmm[0;1;34;94m\"[0m  [0;1;35;95m\"[0;1;31;91m#m[0;1;33;93m##[0m  [0;1;36;96m\"#[0;1;34;94mm#[0;1;35;95m#[0m  [0;1;31;91mm[0;1;33;93mm#[0;1;32;92mmm[0m    [0;1;35;95m\"m[0;1;31;91mm[0m ";
 
 	public static void main(String[] args) {
-		LogOutput.prepareConsole();
-		LogOutput.logMessage(padding, classname, "Program Started");
+		JLogger.prepareConsole();
+		JLogger.logMessage(padding, classname, "Program Started");
 		AnsiConsole.system_out.println(banner);
 		RedditClientMain.main();
 	}

@@ -3,7 +3,7 @@ package zeklandia.desktop.reddit.client;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
-import zeklandia.desktop.logger.LogOutput;
+import zeklandia.desktop.logger.JLogger;
 import zeklandia.desktop.reddit.RedditAuth;
 
 public class RedditClientMain extends javax.swing.JFrame {
@@ -59,7 +59,7 @@ public class RedditClientMain extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
-			LogOutput.logError(padding, classname, "Failed to set theme");
+			JLogger.logError(padding, classname, "Failed to set theme");
 		}
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -81,7 +81,7 @@ public class RedditClientMain extends javax.swing.JFrame {
 			}
 		});
 
-		LogOutput.logMessage(padding, classname, "Created main window");
+		JLogger.logMessage(padding, classname, "Created main window");
 		RedditAuth.main();
 	}
 
