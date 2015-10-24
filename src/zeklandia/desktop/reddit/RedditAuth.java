@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import zeklandia.desktop.logger.JLogger;
+import static zeklandia.desktop.reddit.RedditMain.app;
+import static zeklandia.desktop.reddit.RedditMain.time;
 import zeklandia.desktop.reddit.client.RedditClientMain;
 
 public class RedditAuth extends javax.swing.JDialog {
@@ -160,7 +162,7 @@ public class RedditAuth extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonLoginMouseClicked
 
     private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
-	    JLogger.logMessage(padding, classname, "User cancelled login");
+	    JLogger.logMessage(time, app, classname, padding, "User cancelled login");
 	    RedditClientMain.tabsView.requestFocus();
 	    this.dispose();
     }//GEN-LAST:event_buttonCancelMouseClicked
@@ -182,7 +184,7 @@ public class RedditAuth extends javax.swing.JDialog {
 				dialog.setVisible(true);
 			}
 		});
-		JLogger.logMessage(padding, classname, "Created login prompt");
+		JLogger.logMessage(time, app, classname, padding, "Created login prompt");
 	}
 
 	public static void userLogin(String username, String password) {
@@ -192,37 +194,37 @@ public class RedditAuth extends javax.swing.JDialog {
 		try {
 			user.connect();
 		} catch (Exception ex) {
-			JLogger.logError(padding, classname, "Login failed");
+			JLogger.logError(time, app, classname, padding, "Login failed");
 			JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Login failed");
 			RedditAuth.main();
 		}
-		JLogger.logMessage(padding, classname, "Login successful");
+		JLogger.logMessage(time, app, classname, padding, "Login successful");
 	}
 
 	public static void saveLogin(String username, String password) {
 		File configFolder;
-		configFolder = new File(System.getProperty("user.home") + "/.config/");
+		configFolder = new File(System.getProperty("user.home") + "//.config//");
 
 		try {
 			if (!configFolder.exists()) {
 				boolean status;
 				status = configFolder.mkdir();
 				if (status) {
-					JLogger.logMessage(padding, classname, "Created ~/.config");
+					JLogger.logMessage(time, app, classname, padding, "Created ~/.config");
 				}
 			}
 		} catch (Exception ex) {
-			JLogger.logError(padding, classname, "Failed to create ~/.config");
+			JLogger.logError(time, app, classname, padding, "Failed to create ~/.config");
 		}
 
 		try {
 			FileWriter loginFileStream;
-			loginFileStream = new FileWriter(configFolder + "java-reddit.conf");
+			loginFileStream = new FileWriter(configFolder + "/java-reddit.conf");
 			try (BufferedWriter loginFileBuffer = new BufferedWriter(loginFileStream)) {
 				loginFileBuffer.write(username);
 			}
 		} catch (IOException e) {
-			JLogger.logError(padding, classname, "Failed to save login");
+			JLogger.logError(time, app, classname, padding, "Failed to save login");
 			JOptionPane.showMessageDialog(RedditAuth.buttonLogin, "Saving login failed");
 		}
 	}

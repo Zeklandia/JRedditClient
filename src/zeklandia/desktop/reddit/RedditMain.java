@@ -6,6 +6,8 @@ import zeklandia.desktop.reddit.client.RedditClientMain;
 
 public class RedditMain {
 
+	public static final Boolean time = false;
+	public static final String app = "JRedditClient";
 	private static final String classname = "RedditMain";
 	private static final String padding = "       ";
 	public static final String banner = "                   [0;1;36;96m#[0m      [0;1;33;93m#[0m    [0;1;36;96m\"[0m      [0;1;33;93mm[0m   \n"
@@ -16,7 +18,7 @@ public class RedditMain {
 
 	public static void main(String[] args) {
 		JLogger.prepareConsole();
-		JLogger.logMessage(padding, classname, "Program Started");
+		JLogger.logMessage(time, app, classname, padding, "Program Started");
 		AnsiConsole.system_out.println(banner);
 		RedditClientMain.main();
 	}
